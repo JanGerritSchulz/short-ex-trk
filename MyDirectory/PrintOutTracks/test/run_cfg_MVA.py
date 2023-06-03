@@ -10,7 +10,7 @@ process.MessageLogger = cms.Service("MessageLogger",
     destinations = cms.untracked.vstring("cout"),
     cout = cms.untracked.PSet(threshold = cms.untracked.string("ERROR")))
 
-process.PrintOutTracks = cms.EDAnalyzer("PrintOutTracks")
+process.PrintOutTracks = cms.EDAnalyzer("PrintOutTracks_MVA")
 process.PrintOutTracks.tracks = cms.untracked.InputTag("generalTracks")
 process.PrintOutTracks.mvaValues = cms.untracked.InputTag("generalTracks","MVAValues")
 process.path = cms.Path(process.PrintOutTracks)

@@ -1,9 +1,9 @@
 // -*- C++ -*-
 //
-// Package:    MyDirectory/PrintOutTracks
-// Class:      PrintOutTracks
+// Package:    MyDirectory/PrintOutTracks_MVA
+// Class:      PrintOutTracks_MVA
 //
-/**\class PrintOutTracks PrintOutTracks.cc MyDirectory/PrintOutTracks/plugins/PrintOutTracks.cc
+/**\class PrintOutTracks_MVA PrintOutTracks_MVA.cc MyDirectory/PrintOutTracks/plugins/PrintOutTracks_MVA.cc
 
  Description: [one line class summary]
 
@@ -43,10 +43,10 @@
 
 using reco::TrackCollection;
 
-class PrintOutTracks : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
+class PrintOutTracks_MVA : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
    public:
-      explicit PrintOutTracks(const edm::ParameterSet&);
-      ~PrintOutTracks();
+      explicit PrintOutTracks_MVA(const edm::ParameterSet&);
+      ~PrintOutTracks_MVA();
 
       static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
@@ -74,7 +74,7 @@ class PrintOutTracks : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
 //
 // constructors and destructor
 //
-PrintOutTracks::PrintOutTracks(const edm::ParameterSet& iConfig)
+PrintOutTracks_MVA::PrintOutTracks_MVA(const edm::ParameterSet& iConfig)
   :
   //  tracksToken_(consumes<TrackCollection>(iConfig.getUntrackedParameter<edm::InputTag>("tracks")))
   tracksToken_(consumes<edm::View<reco::Track> >(iConfig.getUntrackedParameter<edm::InputTag>("tracks", edm::InputTag("generalTracks")) )), mvaValsToken_( consumes<edm::View<float> >(iConfig.getUntrackedParameter<edm::InputTag>("mvaValues", edm::InputTag("generalTracks", "MVAValues")) ) )
@@ -84,7 +84,7 @@ PrintOutTracks::PrintOutTracks(const edm::ParameterSet& iConfig)
 }
 
 
-PrintOutTracks::~PrintOutTracks()
+PrintOutTracks_MVA::~PrintOutTracks_MVA()
 {
 
    // do anything here that needs to be done at desctruction time
@@ -99,7 +99,7 @@ PrintOutTracks::~PrintOutTracks()
 
 // ------------ method called for each event  ------------
 void
-PrintOutTracks::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
+PrintOutTracks_MVA::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
    using namespace edm;
 
@@ -151,19 +151,19 @@ PrintOutTracks::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 // ------------ method called once each job just before starting event loop  ------------
 void
-PrintOutTracks::beginJob()
+PrintOutTracks_MVA::beginJob()
 {
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
 void
-PrintOutTracks::endJob()
+PrintOutTracks_MVA::endJob()
 {
 }
 
 // ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
 void
-PrintOutTracks::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
+PrintOutTracks_MVA::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
   //The following says we do not know what parameters are allowed so do no validation
   // Please change this to state exactly what you do use, even if it is no parameters
   edm::ParameterSetDescription desc;
@@ -178,4 +178,4 @@ PrintOutTracks::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
 }
 
 //define this as a plug-in
-DEFINE_FWK_MODULE(PrintOutTracks);
+DEFINE_FWK_MODULE(PrintOutTracks_MVA);
