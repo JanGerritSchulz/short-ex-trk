@@ -3,7 +3,7 @@ import FWCore.ParameterSet.Config as cms
 process = cms.Process("RUN")
 
 process.source = cms.Source("PoolSource",
-                            fileNames = cms.untracked.vstring("file:/eos/user/c/cmsdas/2023/short-ex-trk/run321167_ZeroBias_AOD.root"))
+                            fileNames = cms.untracked.vstring("file:/eos/user/c/cmsdas/2025/short-ex-trk/run355374_ZeroBias_AOD.root"))
 process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(5))
 
 process.MessageLogger = cms.Service("MessageLogger",

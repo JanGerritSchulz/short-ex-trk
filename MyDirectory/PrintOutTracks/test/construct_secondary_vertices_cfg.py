@@ -4,7 +4,7 @@ process = cms.Process("KSHORTS")
 
 # Use the tracks_and_vertices.root file as input.
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring("file:/eos/user/c/cmsdas/2023/short-ex-trk/run321167_Charmonium_AOD.root"))
+    fileNames = cms.untracked.vstring("file:/eos/user/c/cmsdas/2025/short-ex-trk/run355558_DoubleMuonLowMass_AOD.root"))
 process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(-1))
 
 # Suppress messages that are less important than ERRORs.

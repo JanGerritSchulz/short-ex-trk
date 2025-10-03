@@ -2,15 +2,15 @@ import DataFormats.FWLite as fwlite
 import ROOT
 ROOT.gROOT.SetBatch(True)
 
-events = fwlite.Events("/eos/user/c/cmsdas/2023/short-ex-trk/run321167_ZeroBias_MINIAOD.root")
-eventsAOD = fwlite.Events("/eos/user/c/cmsdas/2023/short-ex-trk/run321167_ZeroBias_AOD.root")
+events = fwlite.Events("/eos/user/c/cmsdas/2025/short-ex-trk/run355374_ZeroBias_MINIAOD.root")
+eventsAOD = fwlite.Events("/eos/user/c/cmsdas/2025/short-ex-trk/run355374_ZeroBias_AOD.root")
 
 tracks     = fwlite.Handle("std::vector<pat::PackedCandidate>")
 losttracks = fwlite.Handle("std::vector<pat::PackedCandidate>")
 tracksAOD = fwlite.Handle("std::vector<reco::Track>")
 
 hist_pt       = ROOT.TH1F("pt",       "track pt; p_{T} [GeV]", 100, 0.0, 100.0)
-hist_lowPt       = ROOT.TH1F("lowPt",       "track pt; p_{T} [GeV]", 100, 0.0, 5.0)
+histptZoomedIn= ROOT.TH1F("ptZoomedIn",       "track pt; p_{T} [GeV]", 100, 0.5, 0.505)
 hist_eta      = ROOT.TH1F("eta",      "track eta; #eta", 60, -3.0, 3.0)
 hist_phi      = ROOT.TH1F("phi",      "track phi; #phi", 64, -3.2, 3.2)
 
@@ -20,7 +20,7 @@ hist_numValidHits = ROOT.TH1F("hist_numValidHits", "valid hits; # valid hits"   
 hist_numTkLayers  = ROOT.TH1F("hist_numTkLayers" , "valid layers; # valid Tk layers"  , 25, -0.5, 24.5)
 
 hist_pt_AOD       = ROOT.TH1F("ptAOD",       "track pt; p_{T} [GeV]", 100, 0.0, 100.0)
-hist_lowPt_AOD    = ROOT.TH1F("lowPtAOD",       "track pt; p_{T} [GeV]", 100, 0.0, 5.0)
+histptZoomedIn_AOD = ROOT.TH1F("ptZoomedInAOD",       "track pt; p_{T} [GeV]", 100, 0.5, 0.505)
 hist_eta_AOD      = ROOT.TH1F("etaAOD",      "track eta; #eta", 60, -3.0, 3.0)
 hist_phi_AOD      = ROOT.TH1F("phiAOD",      "track phi; #phi", 64, -3.2, 3.2)
 
@@ -30,7 +30,7 @@ hist_numValidHits_AOD = ROOT.TH1F("hist_numValidHitsAOD", "valid hits; # valid h
 hist_numTkLayers_AOD  = ROOT.TH1F("hist_numTkLayersAOD" , "valid layers; # valid Tk layers"  , 25, -0.5, 24.5)
 
 hist_pt_AOD.SetLineColor(ROOT.kRed)
-hist_lowPt_AOD.SetLineColor(ROOT.kRed)
+histptZoomedIn_AOD.SetLineColor(ROOT.kRed)
 hist_eta_AOD.SetLineColor(ROOT.kRed)
 hist_phi_AOD.SetLineColor(ROOT.kRed)
 
@@ -52,7 +52,7 @@ for i, event in enumerate(events):
         if not track.trackHighPurity():
             continue
         hist_pt.Fill(track.pt())
-        hist_lowPt.Fill(track.pt())
+        histptZoomedIn.Fill(track.pt())
         hist_eta.Fill(track.eta())
         hist_phi.Fill(track.phi())
 
@@ -71,7 +71,7 @@ for i, event in enumerate(eventsAOD):
             continue
 
         hist_pt_AOD.Fill(track.pt())
-        hist_lowPt_AOD.Fill(track.pt())
+        histptZoomedIn_AOD.Fill(track.pt())
         hist_eta_AOD.Fill(track.eta())
         hist_phi_AOD.Fill(track.phi())
 
@@ -89,8 +89,8 @@ hist_pt_AOD.Draw("same")
 c.SetLogy()
 c.SaveAs("track_pt_miniaod.png")
 
-hist_lowPt_AOD.Draw()
-hist_lowPt.Draw("same")
+histptZoomedIn_AOD.Draw()
+histptZoomedIn.Draw("same")
 c.SetLogy()
 c.SaveAs("track_lowPt_miniaod.png")
 c.SetLogy(False)

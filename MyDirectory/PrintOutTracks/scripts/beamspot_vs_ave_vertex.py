@@ -13,7 +13,7 @@ def isGoodPV(vertex):
            return False
     return True
 
-events          = fwlite.Events("/eos/user/c/cmsdas/2023/short-ex-trk/run321167_ZeroBias_AOD.root")
+events          = fwlite.Events("/eos/user/c/cmsdas/2025/short-ex-trk/run355374_ZeroBias_AOD.root")
 primaryVertices = fwlite.Handle("std::vector<reco::Vertex>")
 beamspot        = fwlite.Handle("reco::BeamSpot")
 vtx_position, N_vtx = array( 'd' ), array( 'd' )
